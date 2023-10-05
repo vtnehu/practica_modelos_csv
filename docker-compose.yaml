@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  train:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: trainContainer
+    volumes: 
+      - modelos:/models
+    command: python train.py
+
+
+  test:
+    build:
+      context: ./
+      dockerfile: Dockerfile__1
+    container_name: testContainer
+    volumes: 
+      - modelos:/models
+    command: python inference.py
+    depends_on:
+      - train
+volumes: 
+  modelos:
+  
+
